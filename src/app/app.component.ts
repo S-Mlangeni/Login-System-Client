@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+/*"Formbuilder" module/object allows methods and other modules/objects
+to be passed into the element properties. "Validators" module/object allows
+form validators to be used to for a particular element property.*/
 import { SignupService} from "./signup.service"
 
 @Component({
@@ -8,14 +11,17 @@ import { SignupService} from "./signup.service"
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  ourForm = new FormGroup({
-    username: new FormControl(""),
-    usersurname: new FormControl(""),
-    useremail: new FormControl(""),
-    userphonenumber: new FormControl(""),
+  
+  constructor(private ourFB: FormBuilder, private ourservice: SignupService) {};
+  
+  ourForm = this.ourFB.group({
+    username: ["", [Validators.required, Validators.minLength(3)]],
+    /*second parameter specifies the method/s, validator methods/objects in this
+    case, to be applied to the property*/
+    usersurname: ["", [Validators.required, Validators.minLength(3)]],
+    useremail: ["", Validators.required],
+    userphonenumber: ["", Validators.required],
   })
-
-  constructor(private ourservice: SignupService) {}
 
   submission() {
     console.log(this.ourForm.value);

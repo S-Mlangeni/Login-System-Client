@@ -5,10 +5,14 @@ import {HttpClientModule} from "@angular/common/http"; //used when using http se
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { PageComponent } from './page/page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RegistrationComponent,
+    PageComponent
   ],
   imports: [
     BrowserModule,
