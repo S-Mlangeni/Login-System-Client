@@ -1,1 +1,71 @@
-<p>registration works!</p>
+<div class="container">
+  <h1>Register</h1>
+  <form #F="ngForm" [formGroup]="ourForm" (ngSubmit)="submission()"> 
+  <!--the "ngForm" directive is used to capture the values of the form elements-->
+    <div class="form-group">
+      <input [class.is-invalid]="ourForm.get('username')!.invalid && ourForm.get('username')!.touched" class="form-control" formControlName="username" type="text" placeholder="Name">
+      <!--"[class.____]" represents class binding which add a class to element based on boolean value-->
+      <!--the "ngModel" directive specifies which element to capture the value of.
+      Note that a name attribute is needed for the element, otherwise an error will
+      be returned-->
+      
+      <!--
+        Line below is not needed when using conditional rendering: 
+        <small [class.invisible]="ourForm.get('username')!.valid || ourForm.get('username')!.untouched" class="text-danger">Name is required!</small>
+      -->
+      
+      <!--"invalid-feedback" class needs to align with the above input class (i.e. "is-invalid").
+      And vice-versa if "valid-feedback" class is used.-->
+      <!--Conditional rendering of elements: -->
+      <div *ngIf="ourForm.get('username')!.invalid && ourForm.get('username')!.touched, else ourElse">
+        <small *ngIf="ourForm.get('username')!.errors?.required" class="text-danger">Name is required!</small>  
+        <small *ngIf="ourForm.get('username')!.errors?.minlength" class="text-danger">Name must have atleast 3 characters!</small>  
+        <!--Pay attention to the use of the safe navigation operator, "?".-->
+      </div>
+      <ng-template #ourElse>
+        <small class="invisible">Name</small>
+      </ng-template>
+    </div> 
+
+    <div class="form-group">
+      <input [class.is-invalid]="ourForm.get('usersurname')!.invalid && ourForm.get('usersurname')!.touched" class="form-control" formControlName="usersurname" type="text" placeholder="Surname">
+      <div *ngIf="ourForm.get('usersurname')!.invalid && ourForm.get('usersurname')!.touched, else ourElse">
+        <small *ngIf="ourForm.get('usersurname')!.errors?.required" class="text-danger">Surname is required!</small>  
+        <small *ngIf="ourForm.get('usersurname')!.errors?.minlength" class="text-danger">Surname must have atleast 3 characters!</small>  
+      </div>
+      <ng-template #ourElse>
+        <small class="invisible">Surname</small>
+      </ng-template>
+    </div>
+    
+    <div class="form-group">
+      <input [class.is-invalid]="ourForm.get('useremail')!.invalid && ourForm.get('useremail')!.touched" class="form-control" formControlName="useremail" type="text" placeholder="Email">
+      <div *ngIf="ourForm.get('useremail')!.invalid && ourForm.get('useremail')!.touched, else ourElse">
+        <small *ngIf="ourForm.get('useremail')!.errors?.required" class="text-danger">Email is required!</small>  
+      </div>
+      <ng-template #ourElse>
+        <small class="invisible">Email</small>
+      </ng-template>
+    </div>
+    
+    <div class="form-group">
+      <input [class.is-invalid]="ourForm.get('userpassword')!.invalid && ourForm.get('userpassword')!.touched" class="form-control" formControlName="userpassword" type="password" placeholder="Password" >
+      <div *ngIf="ourForm.get('userpassword')!.invalid && ourForm.get('userpassword')!.touched, else ourElse">
+        <small *ngIf="ourForm.get('userpassword')!.errors?.required" class="text-danger">Password is required!</small>  
+      </div>
+      <ng-template #ourElse>
+        <small class="invisible">Password</small>
+      </ng-template>
+    </div>
+    
+    <button [disabled]="F.form.invalid" class="container-fluid btn btn-secondary" type="submit">Submit</button>
+    <mat-progress-bar mode="indeterminate" *ngIf="loader" color="accent"></mat-progress-bar>
+    
+    <div class="form-group">
+      <small>Already registered? <a routerLink="/login" routerLinkActive="active">Login</a></small>
+      <!--routerLinkActive is linked to the active css class -->  
+    </div>
+
+  </form>
+  <!--"{{ourForm.value|json}}" shows the values in json format-->
+</div>
