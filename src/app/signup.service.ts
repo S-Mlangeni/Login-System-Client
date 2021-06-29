@@ -5,8 +5,8 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class SignupService {
-  api_url = "http://127.0.0.1:8000/api";
-  search_api_url = "http://127.0.0.1:8000/api/search";
+  api_url = "https://sign-up-server.herokuapp.com/api"; //"http://127.0.0.1:8000/api";
+  search_api_url = "https://sign-up-server.herokuapp.com/api/search";//"http://127.0.0.1:8000/api/search";
   constructor(private http: HttpClient) { }
 
   loggingIn(LoginData: any) {

@@ -15,7 +15,9 @@ const routes: Routes = [
 automatically imports and calls these components on the app.module */
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: 'enabled'
+})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -22,7 +22,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     PageNotFoundComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
