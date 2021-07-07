@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
   handlingresponse (response: any, ourpage: string) {
     this.loader = false;
     this.serverresult = response[0];
+    sessionStorage.setItem("Result", response[0]);
     console.log("You are Successful! ", this.serverresult);
     if (this.serverresult) {
       this.router.navigate([ourpage]);
